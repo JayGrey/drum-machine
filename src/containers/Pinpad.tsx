@@ -10,68 +10,23 @@ interface PinpadProps {
 }
 
 const Pinpad = (props: PinpadProps): JSX.Element => {
+  const makeRow = (arr: string[]): JSX.Element[] => {
+    return arr.map(elem => (
+      <Button
+        key={elem}
+        title={elem}
+        pressed={props.keys[elem]}
+        keyDownHandler={props.keyDownHandler}
+        keyUpHandler={props.keyUpHandler}
+      />
+    ));
+  };
+
   return (
     <div className="pinpad border border-default mx-auto mt-2">
-      <div className="row mt-1">
-        <Button
-          title={"Q"}
-          pressed={props.keys["Q"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-        <Button
-          title={"W"}
-          pressed={props.keys["W"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-        <Button
-          title={"E"}
-          pressed={props.keys["E"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-      </div>
-      <div className="row mt-1">
-        <Button
-          title={"A"}
-          pressed={props.keys["A"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-        <Button
-          title={"S"}
-          pressed={props.keys["S"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-        <Button
-          title={"D"}
-          pressed={props.keys["D"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-      </div>
-      <div className="row mt-1">
-        <Button
-          title={"Z"}
-          pressed={props.keys["Z"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-        <Button
-          title={"X"}
-          pressed={props.keys["X"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-        <Button
-          title={"C"}
-          pressed={props.keys["C"]}
-          keyDownHandler={props.keyDownHandler}
-          keyUpHandler={props.keyUpHandler}
-        />
-      </div>
+      <div className="row mt-1">{makeRow(["Q", "W", "E"])}</div>
+      <div className="row mt-1">{makeRow(["A", "S", "D"])}</div>
+      <div className="row mt-1">{makeRow(["Z", "X", "C"])}</div>
     </div>
   );
 };
