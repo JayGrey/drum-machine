@@ -14,6 +14,7 @@ export const keyDown = (key: string): void => {
 export const keyUp = (key: string): void => {
   store.dispatch(keyReleasedAction(key));
   store.dispatch(displayChangedAction(`${key} played`));
+  (document.querySelector(`audio#${key}`) as HTMLMediaElement).play();
 };
 
 export const App = (): JSX.Element => {

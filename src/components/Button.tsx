@@ -22,23 +22,12 @@ const soundLinks: { [key: string]: string } = {
 };
 
 export const Button = (props: ButtonProps): JSX.Element => {
-  // const handler = (): void => {
-  //   props.clickHandler(`${props.title} played`);
-  //   (document.querySelector(`audio#${props.title}`) as HTMLMediaElement).play();
-  // };
-
-  if (props.pressed) {
-    console.log("catched pressed action");
-  }
-
   const buttonClass = classNames("btn", props.pressed ? "btn-warning" : "btn-secondary", "drum-pad");
   const mouseDownHandler = (event: React.MouseEvent): void => {
-    // props.keyDownHandler(props.title);
     keyDown(props.title);
   };
 
   const mouseUpHandler = (event: React.MouseEvent): void => {
-    // props.keyUpHandler(props.title);
     keyUp(props.title);
   };
 
