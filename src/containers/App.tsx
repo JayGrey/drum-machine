@@ -5,18 +5,41 @@ import { Provider } from "react-redux";
 import Display from "./Display";
 import Pinpad from "./Pinpad";
 
-import { store } from "../store/store";
+import { store, keyPressedAction, keyReleasedAction, displayChangedAction } from "../store/store";
 
-export const App = () => {
+export const keyDown = (key: string): void => {
+  store.dispatch(keyPressedAction(key));
+};
 
-  const keyHandler = (event: KeyboardEvent) => {
-    console.log(event.key, event.code);
-  }
+export const keyUp = (key: string): void => {
+  store.dispatch(keyReleasedAction(key));
+  store.dispatch(displayChangedAction(`${key} played`));
+};
+
+export const App = (): JSX.Element => {
+  const validKeys = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"];
+
+  const keyDownHandler = (event: KeyboardEvent): void => {
+    if (validKeys.includes(event.key.toUpperCase())) {
+      keyDown(event.key.toUpperCase());
+    }
+  };
+
+  const keyUpHandler = (event: KeyboardEvent): void => {
+    if (validKeys.includes(event.key.toUpperCase())) {
+      keyUp(event.key.toUpperCase());
+    }
+  };
+  useEffect(() => {
+    document.addEventListener("keyup", keyUpHandler);
+
+    return (): void => document.removeEventListener("keyup", keyUpHandler);
+  });
 
   useEffect(() => {
-    document.addEventListener("keypress", keyHandler);
+    document.addEventListener("keydown", keyDownHandler);
 
-    return () => document.removeEventListener("keypress", keyHandler);
+    return (): void => document.removeEventListener("keydown", keyDownHandler);
   });
 
   return (
