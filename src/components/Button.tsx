@@ -22,7 +22,7 @@ const soundLinks: { [key: string]: string } = {
 };
 
 export const Button = (props: ButtonProps): JSX.Element => {
-  const buttonClass = classNames("btn", props.pressed ? "btn-warning" : "btn-secondary", "drum-pad");
+  const buttonClass = classNames("btn", "drum-pad", "p-0", "font-weight-bold", props.pressed ? "btn-warning" : "btn-secondary");
   const mouseDownHandler = (event: React.MouseEvent): void => {
     keyDown(props.title);
   };
@@ -34,11 +34,11 @@ export const Button = (props: ButtonProps): JSX.Element => {
   return (
     <div className="col d-flex flex-column align-items-center ">
       <span className="border border-secondary rounded p-1">
-        <button className={buttonClass} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
+        <button className={buttonClass} id={`button${props.title}`} onMouseDown={mouseDownHandler} onMouseUp={mouseUpHandler}>
+          {props.title}
           <audio src={soundLinks[props.title]} className="clip" id={props.title}></audio>
         </button>
       </span>
-      <p className="font-weight-bold">{props.title}</p>
     </div>
   );
 };

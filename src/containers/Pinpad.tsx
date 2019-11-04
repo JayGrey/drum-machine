@@ -23,10 +23,10 @@ const Pinpad = (props: PinpadProps): JSX.Element => {
   };
 
   return (
-    <div className="pinpad border border-default mx-auto mt-2">
-      <div className="row mt-1">{makeRow(["Q", "W", "E"])}</div>
-      <div className="row mt-1">{makeRow(["A", "S", "D"])}</div>
-      <div className="row mt-1">{makeRow(["Z", "X", "C"])}</div>
+    <div className="pinpad border border-default mx-auto mt-2 p-2">
+      <div className="row mt-3">{makeRow(["Q", "W", "E"])}</div>
+      <div className="row mt-3">{makeRow(["A", "S", "D"])}</div>
+      <div className="row mt-3">{makeRow(["Z", "X", "C"])}</div>
     </div>
   );
 };
