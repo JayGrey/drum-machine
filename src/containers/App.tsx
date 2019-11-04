@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useEffect } from "react";
-import { Provider } from "react-redux";
+import * as ReactRedux from "react-redux";
 
 import Display from "./Display";
 import Pinpad from "./Pinpad";
@@ -31,24 +30,24 @@ export const App = (): JSX.Element => {
       keyUp(event.key.toUpperCase());
     }
   };
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener("keyup", keyUpHandler);
 
     return (): void => document.removeEventListener("keyup", keyUpHandler);
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     document.addEventListener("keydown", keyDownHandler);
 
     return (): void => document.removeEventListener("keydown", keyDownHandler);
   });
 
   return (
-    <Provider store={store}>
+    <ReactRedux.Provider store={store}>
       <div id="drum-machine" className="container-fluid">
         <Display />
         <Pinpad />
       </div>
-    </Provider>
+    </ReactRedux.Provider>
   );
 };
